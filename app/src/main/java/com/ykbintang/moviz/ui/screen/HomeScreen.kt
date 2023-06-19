@@ -42,7 +42,7 @@ fun HomeScreen(
                 viewModel.getMovieNowPlayig()
             }
             is UiState.Success -> {
-                HomeContent(movies = uiState.data, navigateToDetail = {})
+                HomeContent(movies = uiState.data, navigateToDetail = navigateToDetail)
             }
             
             is UiState.Error -> {

@@ -18,13 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ykbintang.moviz.navigation.NavigationItem
 import com.ykbintang.moviz.navigation.Screen
 import com.ykbintang.moviz.ui.screen.HomeScreen
+import com.ykbintang.moviz.ui.screen.detail.DetailScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +40,7 @@ fun MovizApp(
 
     Scaffold(
         bottomBar = {
-            if (currentRoute != Screen.DetailGame.route){
+            if (currentRoute != Screen.MovieDetail.route){
                 BottomBar(navController = navController)
             }
         },
@@ -50,8 +53,21 @@ fun MovizApp(
         ){
             composable(Screen.Home.route) {
                 HomeScreen(navigateToDetail = { gameId ->
-                    navController.navigate(Screen.DetailGame.createRoute(gameId))
+                    navController.navigate(Screen.MovieDetail.createRoute(gameId))
                 })
+            }
+
+            composable(
+                route = Screen.MovieDetail.route,
+                arguments = listOf(navArgument("movieId") { type = NavType.IntType}),
+            ) {
+                val id = it.arguments?.getInt("movieId") ?: 0
+                DetailScreen(
+                    movieId = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }
