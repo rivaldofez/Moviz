@@ -1,9 +1,13 @@
 package com.ykbintang.moviz.ui.components
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,22 +20,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     query: String,
-    onQueryChange: (String) -> Unit,
+    onSubmit: () -> Unit,
+    onValueChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     TextField(
         value = query,
-        onValueChange = onQueryChange,
-        leadingIcon = {
+        onValueChange = onValueChanged,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(
+            onSearch = { onSubmit() }
+        ),
+        trailingIcon = {
             Icon(
                 imageVector = Icons.Rounded.Search,
-                contentDescription = null
+                contentDescription = null,
+                modifier = modifier.clickable {
+                    onSubmit()
+                }
             )
         },
         singleLine = true,

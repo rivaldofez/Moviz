@@ -14,7 +14,7 @@ data class MovieDetail(
     val overview: String,
     val originalTitle: String,
     val runtime: Int,
-    val posterPath: String,
+    val posterPath: String?,
     val spokenLanguages: String,
     val releaseDate: String,
     val tagline: String? = null,

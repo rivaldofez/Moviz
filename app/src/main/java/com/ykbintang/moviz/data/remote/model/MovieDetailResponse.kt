@@ -32,7 +32,7 @@ data class MovieDetailResponse(
 	val runtime: Int,
 
 	@field:SerializedName("poster_path")
-	val posterPath: String,
+	val posterPath: String?,
 
 	@field:SerializedName("spoken_languages")
 	val spokenLanguages: List<SpokenLanguagesItem>,

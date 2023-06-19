@@ -13,7 +13,7 @@ interface MovieApi {
 
     @GET("https://api.themoviedb.org/3/search/movie")
     suspend fun getSearchMovie(
-        @Query("query") query: String
+        @Query("query", encoded = true) query: String
     ): Response<MovieListResponse>
 
     @GET("movie/{id}")

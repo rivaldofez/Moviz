@@ -6,7 +6,7 @@ import com.ykbintang.moviz.data.remote.model.MovieListItem
 data class Movie(
     val originalTitle: String,
     val title: String,
-    val posterPath: String,
+    val posterPath: String?,
     val backdropPath: String? = null,
     val releaseDate: String,
     val id: Int,

@@ -41,7 +41,7 @@ data class MovieListItem(
 //	val genreIds: List<Int?>? = null,
 
 	@field:SerializedName("poster_path")
-	val posterPath: String,
+	val posterPath: String?,
 
 	@field:SerializedName("backdrop_path")
 	val backdropPath: String? = null,

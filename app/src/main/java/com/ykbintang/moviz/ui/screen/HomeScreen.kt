@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -37,13 +38,14 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetail: (Int) -> Unit,
 ) {
+    val query by viewModel.query
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when(uiState){
             is UiState.Loading -> {
-                viewModel.getMovieNowPlayig()
+                viewModel.searchCurrentMovieData()
             }
             is UiState.Success -> {
-                HomeContent(movies = uiState.data, navigateToDetail = navigateToDetail)
+                HomeContent(movies = uiState.data, onSubmit = viewModel::searchCurrentMovieData, query = query, onValueChanged = viewModel::updateQueryValue ,navigateToDetail = navigateToDetail)
             }
             
             is UiState.Error -> {
@@ -57,7 +59,8 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     query: String,
-    onQueryChange: (String) -> Unit,
+    onSubmit: () -> Unit,
+    onValueChanged: (String) -> Unit,
     movies: List<Movie>,
     modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit
@@ -69,7 +72,7 @@ fun HomeContent(
 
         TopAppBar(title = { Text("Explore Now Playing Movie")})
         
-        SearchBar(query = query, onQueryChange = onQueryChange)
+        SearchBar(query = query, onSubmit = onSubmit, onValueChanged = onValueChanged)
 
 
         LazyVerticalGrid(
