@@ -16,6 +16,13 @@ class MovieService @Inject constructor(private val movieApi: MovieApi) {
         }
     }
 
+    suspend fun getSearchMovie(query: String): List<MovieListItem> {
+        return withContext(Dispatchers.IO){
+            val movies = movieApi.getSearchMovie(query = query)
+            movies.body()?.movies ?: emptyList()
+        }
+    }
+
     suspend fun getMovieDetail(movieId: Int): MovieDetailResponse? {
         return withContext(Dispatchers.IO){
             val movieDetail = movieApi.getMovieDetail(id = movieId)
