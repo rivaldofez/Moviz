@@ -71,7 +71,7 @@ fun HomeContent(
                 .padding(16.dp)
         ) {
             items(movies, key = { it.id }) {
-                MovieItem(image = it.posterPath, title = it.title, release = it.releaseDate, modifier = modifier.clickable{
+                MovieItem(image = "https://image.tmdb.org/t/p/w500" + it.posterPath, title = it.title, release = it.releaseDate, modifier = modifier.clickable{
                     navigateToDetail(it.id)
                 })
             }
