@@ -1,10 +1,33 @@
 package com.ykbintang.moviz.ui.screen
 
 import android.util.Log
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.R
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ykbintang.moviz.model.Movie
+import com.ykbintang.moviz.ui.components.MovieItem
 import com.ykbintang.moviz.ui.helper.UiState
 
 @Composable
@@ -17,13 +40,40 @@ fun HomeScreen(
                 viewModel.getMovieNowPlayig()
             }
             is UiState.Success -> {
-                Log.d("Tag", "Result " + uiState.data.toString())
-                
-                Text(text = "Test View Model Get Data")
+                HomeContent(movies = uiState.data, navigateToDetail = {})
             }
             
             is UiState.Error -> {
                 Log.d("Tag", "Error")
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeContent(
+    movies: List<Movie>,
+    modifier: Modifier = Modifier,
+    navigateToDetail: (Int) -> Unit
+){
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(150.dp),
+            contentPadding = PaddingValues(0.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp, alignment = Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(movies, key = { it.id }) {
+                MovieItem(image = it.posterPath, title = it.title, release = it.releaseDate, modifier = modifier.clickable{
+                    navigateToDetail(it.id)
+                })
             }
         }
     }
