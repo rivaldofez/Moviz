@@ -1,5 +1,6 @@
 package com.ykbintang.moviz.data.remote
 
+import com.ykbintang.moviz.data.remote.model.MovieDetailResponse
 import com.ykbintang.moviz.data.remote.model.MovieListResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,5 +14,5 @@ interface MovieApi {
     @GET("movie/{id}")
     suspend fun getMovieById(
         @Path("id") id: String
-    )
+    ): Response<MovieDetailResponse>
 }
