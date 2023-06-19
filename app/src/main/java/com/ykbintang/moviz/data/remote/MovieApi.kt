@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface MovieApi {
-    @GET("/movie/now_playing?language=en-US&page=1")
+    @GET("movie/now_playing?language=en-US&page=1")
     suspend fun getMovieNowPlaying(): Response<MovieListResponse>
 }
