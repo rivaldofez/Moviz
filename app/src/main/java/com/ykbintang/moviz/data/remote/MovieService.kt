@@ -7,8 +7,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieService @Inject constructor(private val movieApi: MovieApi) {
-
-
     suspend fun getMovieNowPlaying(): List<MovieListItem> {
         return withContext(Dispatchers.IO){
             val movies = movieApi.getMovieNowPlaying()
