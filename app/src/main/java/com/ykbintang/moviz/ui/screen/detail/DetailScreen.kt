@@ -12,21 +12,69 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.ykbintang.moviz.R
+import com.ykbintang.moviz.ui.helper.UiState
 import com.ykbintang.moviz.ui.theme.MovizTheme
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailScreen(
+    movieId: Int,
+    modifier: Modifier = Modifier,
+    viewModel: DetailViewModel = hiltViewModel(),
+    navigateback: () -> Unit,
+){
+    val context = LocalContext.current
+
+    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+        when(uiState){
+            is UiState.Loading -> {
+                viewModel.getMovieDetail(movieId = movieId)
+            }
+            is UiState.Success -> {
+                val data = uiState.data
+                Scaffold { innerPadding ->
+                    DetailContent(
+                        title = data.title,
+                        release = data.releaseDate,
+                        duration = data.runtime.toString(),
+                        synopsis = data.overview,
+                        originalTitle = data.originalTitle,
+                        genres = data.genres,
+                        languages = data.spokenLanguages,
+                        posterPath = data.posterPath,
+                        backdropPath = data.backdropPath,
+                        modifier = modifier.padding(innerPadding)
+                    )
+                }
+            }
+
+            is UiState.Error -> {
+
+            }
+        }
+
+    }
+}
 
 @Composable
 fun DetailContent(
@@ -88,7 +136,8 @@ fun DetailContent(
                                 style = MaterialTheme.typography.headlineMedium.copy(
                                     fontWeight = FontWeight.ExtraBold
                                 ),
-                                modifier = modifier.offset( y = 100.dp)
+                                modifier = modifier
+                                    .offset(y = 100.dp)
                                     .padding(start = 16.dp, top = 16.dp)
                             )
 
@@ -98,7 +147,8 @@ fun DetailContent(
                                 style = MaterialTheme.typography.bodyLarge.copy(
                                     fontWeight = FontWeight.Normal
                                 ),
-                                modifier = modifier.offset( y = 100.dp)
+                                modifier = modifier
+                                    .offset(y = 100.dp)
                                     .padding(start = 16.dp)
                             )
                         }

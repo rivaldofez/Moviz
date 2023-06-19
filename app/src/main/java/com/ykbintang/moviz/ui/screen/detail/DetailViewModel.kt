@@ -20,7 +20,7 @@ class DetailViewModel @Inject constructor(
     private var _uiState: MutableStateFlow<UiState<MovieDetail>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<MovieDetail>> get() = _uiState
 
-    fun getDetailGame(movieId: Int) {
+    fun getMovieDetail(movieId: Int) {
         try {
             viewModelScope.launch {
                 movieRepository.getMovieDetail(movieId = movieId)
