@@ -1,7 +1,9 @@
 package com.ykbintang.moviz.data.remote
 
+import com.ykbintang.moviz.data.remote.model.MovieDetailResponse
 import com.ykbintang.moviz.data.remote.model.MovieListItem
 import com.ykbintang.moviz.data.remote.model.MovieListResponse
+import com.ykbintang.moviz.model.MovieDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -11,6 +13,13 @@ class MovieService @Inject constructor(private val movieApi: MovieApi) {
         return withContext(Dispatchers.IO){
             val movies = movieApi.getMovieNowPlaying()
             movies.body()?.movies ?: emptyList()
+        }
+    }
+
+    suspend fun getMovieDetail(movieId: Int): MovieDetailResponse? {
+        return withContext(Dispatchers.IO){
+            val movieDetail = movieApi.getMovieDetail(id = movieId)
+            movieDetail.body()
         }
     }
 
