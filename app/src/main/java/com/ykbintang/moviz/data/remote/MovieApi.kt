@@ -11,6 +11,11 @@ interface MovieApi {
     @GET("movie/now_playing?language=en-US&page=1")
     suspend fun getMovieNowPlaying(): Response<MovieListResponse>
 
+    @GET("https://api.themoviedb.org/3/search/movie")
+    suspend fun getSearchMovie(
+        @Query("query") query: String
+    ): Response<MovieListResponse>
+
     @GET("movie/{id}")
     suspend fun getMovieDetail(
         @Path("id") id: Int
