@@ -20,4 +20,10 @@ class MovieRepository @Inject constructor( private val movieService: MovieServic
         return flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
     }
 
+    suspend fun getSearchMovie(query: String): Flow<List<Movie>> {
+        return flowOf(movieService.getSearchMovie(query).map {
+            it.toMovie()
+        })
+    }
+
 }

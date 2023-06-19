@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ykbintang.moviz.model.Movie
 import com.ykbintang.moviz.ui.components.MovieItem
+import com.ykbintang.moviz.ui.components.SearchBar
 import com.ykbintang.moviz.ui.helper.UiState
 
 @Composable
@@ -55,6 +56,8 @@ fun HomeScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeContent(
+    query: String,
+    onQueryChange: (String) -> Unit,
     movies: List<Movie>,
     modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit
@@ -65,6 +68,8 @@ fun HomeContent(
     ) {
 
         TopAppBar(title = { Text("Explore Now Playing Movie")})
+        
+        SearchBar(query = query, onQueryChange = onQueryChange)
 
 
         LazyVerticalGrid(
@@ -75,6 +80,7 @@ fun HomeContent(
             modifier = modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .align(Alignment.CenterHorizontally)
         ) {
             items(movies, key = { it.id }) {
                 MovieItem(image = "https://image.tmdb.org/t/p/w500" + it.posterPath, title = it.title, release = it.releaseDate, modifier = modifier.clickable{

@@ -1,6 +1,8 @@
 package com.ykbintang.moviz.ui.screen.detail
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +14,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,9 +26,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +48,7 @@ fun DetailScreen(
     movieId: Int,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = hiltViewModel(),
-    navigateback: () -> Unit,
+    navigateBack: () -> Unit,
 ){
     val context = LocalContext.current
 
@@ -61,9 +68,10 @@ fun DetailScreen(
                         originalTitle = data.originalTitle,
                         genres = data.genres,
                         languages = data.spokenLanguages,
-                        posterPath = data.posterPath,
-                        backdropPath = data.backdropPath,
-                        modifier = modifier.padding(innerPadding)
+                        posterPath = "https://image.tmdb.org/t/p/w500" + data.posterPath,
+                        backdropPath = "https://image.tmdb.org/t/p/w500" + data.backdropPath,
+                        modifier = modifier.padding(innerPadding),
+                        onBackClick = navigateBack
                     )
                 }
             }
@@ -87,6 +95,7 @@ fun DetailContent(
     languages: String,
     posterPath: String,
     backdropPath: String,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -104,7 +113,7 @@ fun DetailContent(
 
                     Column {
                         Image(
-                            painter = painterResource(id = R.drawable.ay),
+                            painter = rememberImagePainter(data = backdropPath),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = modifier
@@ -117,7 +126,7 @@ fun DetailContent(
                         modifier = modifier.align(Alignment.BottomStart)
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.ax),
+                            painter = rememberImagePainter(data = posterPath),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = modifier
@@ -132,13 +141,15 @@ fun DetailContent(
                         Column {
                             Text(
                                 text = title,
-                                textAlign = TextAlign.Center,
-                                style = MaterialTheme.typography.headlineMedium.copy(
+                                textAlign = TextAlign.Start,
+                                style = MaterialTheme.typography.headlineSmall.copy(
                                     fontWeight = FontWeight.ExtraBold
                                 ),
+                                maxLines = 2
+                                ,
                                 modifier = modifier
                                     .offset(y = 100.dp)
-                                    .padding(start = 16.dp, top = 16.dp)
+                                    .padding(start = 16.dp, top = 8.dp, end = 16.dp)
                             )
 
                             Text(
@@ -149,10 +160,22 @@ fun DetailContent(
                                 ),
                                 modifier = modifier
                                     .offset(y = 100.dp)
-                                    .padding(start = 16.dp)
+                                    .padding(start = 16.dp, end = 16.dp)
                             )
                         }
                     }
+
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back Button",
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .clickable { onBackClick() }
+                        .clip(RoundedCornerShape(size = 8.dp))
+                        .background(color = Color.White)
+                        .padding(8.dp)
+
+                )
             }
 
             Text(
@@ -174,7 +197,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "More Information",
+                text = "Detail Information",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.ExtraBold
@@ -276,7 +299,8 @@ fun DetailContentPreview() {
             genres = "Horror, Adventure",
             languages = "English, Indonesia",
             posterPath = "https://alternativemovieposters.com/wp-content/uploads/2023/01/Julian-De-Lio_Azkaban.jpg",
-            backdropPath = "https://w0.peakpx.com/wallpaper/344/757/HD-wallpaper-harry-potter-hogwarts-castle.jpg"
+            backdropPath = "https://w0.peakpx.com/wallpaper/344/757/HD-wallpaper-harry-potter-hogwarts-castle.jpg",
+            onBackClick = {}
         )
     }
 }
