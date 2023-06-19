@@ -14,10 +14,10 @@ data class MovieDetailResponse(
 	val backdropPath: String,
 
 	@field:SerializedName("genres")
-	val genres: List<GenresItem>? = null,
+	val genres: List<GenresItem>,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int? = null,
@@ -29,7 +29,7 @@ data class MovieDetailResponse(
 	val originalTitle: String,
 
 	@field:SerializedName("runtime")
-	val runtime: Int? = null,
+	val runtime: Int,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String,
@@ -55,10 +55,10 @@ data class MovieDetailResponse(
 
 data class SpokenLanguagesItem(
 	@field:SerializedName("english_name")
-	val englishName: String? = null
+	val englishName: String
 )
 
 data class GenresItem(
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String
 )
