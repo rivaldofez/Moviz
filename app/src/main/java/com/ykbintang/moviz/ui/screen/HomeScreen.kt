@@ -61,6 +61,10 @@ fun HomeContent(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        TopAppBar(title = { Text("Explore Now Playing Movie")})
+
+
         LazyVerticalGrid(
             columns = GridCells.Adaptive(150.dp),
             contentPadding = PaddingValues(0.dp),
