@@ -152,13 +152,31 @@ fun DetailContent(
             )
 
             Text(
+                text = "Duration",
+                textAlign = TextAlign.Start,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier = modifier
+                    .padding(top = 4.dp, start = 16.dp)
+            )
+
+            Text(
+                text = duration,
+                textAlign = TextAlign.Start,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = modifier
+                    .padding(top = 2.dp, start = 16.dp)
+            )
+
+            Text(
                 text = "Genre",
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                 ),
                 modifier = modifier
-                    .padding(top = 8.dp, start = 16.dp)
+                    .padding(top = 4.dp, start = 16.dp)
             )
 
             Text(
@@ -176,7 +194,7 @@ fun DetailContent(
                     fontWeight = FontWeight.Bold
                 ),
                 modifier = modifier
-                    .padding(top = 8.dp, start = 16.dp)
+                    .padding(top = 4.dp, start = 16.dp)
             )
 
             Text(
