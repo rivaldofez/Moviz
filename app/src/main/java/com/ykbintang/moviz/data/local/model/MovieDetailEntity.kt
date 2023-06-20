@@ -22,9 +22,10 @@ data class MovieDetailEntity(
     val tagline: String? = null,
     val adult: Boolean? = null,
     val homepage: String? = null,
-    val status: String? = null
+    val status: String? = null,
+    var isFavorite: Boolean
 )
 
 fun MovieDetail.toMovieDetailEntity() = MovieDetailEntity(
-    id, originalLanguage, title, backdropPath, genres, voteCount, overview, originalTitle, runtime, posterPath, spokenLanguages, releaseDate
+    id, originalLanguage, title, backdropPath, genres, voteCount, overview, originalTitle, runtime, posterPath, spokenLanguages, releaseDate, tagline, adult, homepage, status, isFavorite
 )

@@ -1,6 +1,7 @@
 package com.ykbintang.moviz.model
 
 import com.google.gson.annotations.SerializedName
+import com.ykbintang.moviz.data.local.model.MovieDetailEntity
 import com.ykbintang.moviz.data.remote.model.MovieDetailResponse
 import com.ykbintang.moviz.data.remote.model.MovieListItem
 
@@ -20,7 +21,8 @@ data class MovieDetail(
     val tagline: String? = null,
     val adult: Boolean? = null,
     val homepage: String? = null,
-    val status: String? = null
+    val status: String? = null,
+    var isFavorite: Boolean = false
 )
 
 fun MovieDetailResponse.toMovieDetail(): MovieDetail {
@@ -46,4 +48,8 @@ fun MovieDetailResponse.toMovieDetail(): MovieDetail {
         status = status
     )
 }
+
+fun MovieDetailEntity.toMovieDetail() = MovieDetail(
+    originalLanguage, title, backdropPath, genres, id, voteCount, overview, originalTitle, runtime, posterPath, spokenLanguages, releaseDate, tagline, adult, homepage,status, isFavorite
+)
 
