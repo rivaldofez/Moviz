@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ykbintang.moviz.ui.screen.HomeScreen
 import com.ykbintang.moviz.ui.theme.MovizTheme
 import dagger.hilt.android.AndroidEntryPoint
 

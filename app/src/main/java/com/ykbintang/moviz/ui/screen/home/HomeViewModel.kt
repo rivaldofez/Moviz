@@ -1,4 +1,4 @@
-package com.ykbintang.moviz.ui.screen
+package com.ykbintang.moviz.ui.screen.home
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
