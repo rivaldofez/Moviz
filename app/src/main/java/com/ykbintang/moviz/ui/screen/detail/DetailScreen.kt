@@ -1,11 +1,14 @@
 package com.ykbintang.moviz.ui.screen.detail
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -17,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -59,7 +63,32 @@ fun DetailScreen(
             }
             is UiState.Success -> {
                 val data = uiState.data
-                Scaffold { innerPadding ->
+                Scaffold (
+                    floatingActionButton = {
+                        FloatingActionButton(onClick = {
+                            data.isFavorite = !data.isFavorite
+                            viewModel.insertFavoriteMovie(movieDetail = data)
+                            if (data.isFavorite) {
+                                showToast(
+                                    context = context,
+                                    message = R.string.added_to_favorite
+                                )
+                            } else {
+                                showToast(
+                                    context = context,
+                                    message = R.string.removed_from_favorite
+                                )
+                            }
+                        }) {
+                            if (data.isFavorite){
+                                Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null, tint = Color.White)
+                            } else {
+                                Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null, tint = Color.White)
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxSize()
+                ){ innerPadding ->
                     DetailContent(
                         title = data.title,
                         release = data.releaseDate,
@@ -82,6 +111,14 @@ fun DetailScreen(
         }
 
     }
+}
+
+private fun showToast(context: Context, message: Int){
+    Toast.makeText(
+        context,
+        message,
+        Toast.LENGTH_SHORT
+    ).show()
 }
 
 @Composable
