@@ -1,11 +1,9 @@
 package com.ykbintang.moviz.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -22,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.ykbintang.moviz.R
 import com.ykbintang.moviz.ui.theme.Shapes
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +41,7 @@ fun SearchBar(
         trailingIcon = {
             Icon(
                 imageVector = Icons.Rounded.Search,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.cd_icon_search),
                 modifier = modifier.clickable {
                     onSubmit()
                 }
@@ -57,12 +56,13 @@ fun SearchBar(
             unfocusedIndicatorColor = Color.Transparent
         ),
         placeholder = {
-            Text("Search Movie")
+            Text(stringResource(id = R.string.search_movie))
         },
         modifier = modifier
-            .padding(16.dp)
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
-            .shadow(56.dp)
+            .heightIn(min = 30.dp)
+            .padding(horizontal = 16.dp)
+            .shadow(4.dp)
+
     )
 }

@@ -2,4 +2,7 @@
     <string name="app_name">Moviz</string>
     <string name="added_to_favorite">Added to favorite list</string>
     <string name="removed_from_favorite">Removed from favorite list</string>
+    <string name="search_movie">Search Movie...</string>
+    <string name="cd_movie_item">Poster of %s</string>
+    <string name="cd_icon_search">Search Icon</string>
 </resources>

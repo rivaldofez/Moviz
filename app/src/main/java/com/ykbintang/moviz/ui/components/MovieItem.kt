@@ -3,20 +3,20 @@ package com.ykbintang.moviz.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.ykbintang.moviz.R
 import com.ykbintang.moviz.ui.theme.MovizTheme
 import com.ykbintang.moviz.ui.theme.Shapes
 
@@ -31,9 +31,11 @@ fun MovieItem(
         modifier = modifier
     ) {
         Image(
-            painter = rememberImagePainter(data = image),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
+            painter = if (image.isEmpty()) painterResource(id = R.drawable.img_poster_placeholder) else rememberImagePainter(
+                data = image
+            ),
+            contentDescription = stringResource(id = R.string.cd_movie_item),
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(170.dp)
                 .clip(Shapes.medium)
