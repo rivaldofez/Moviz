@@ -27,8 +27,8 @@ data class MovieDetail(
 fun MovieDetailResponse.toMovieDetail(): MovieDetail {
     val languages = spokenLanguages.joinToString { it.englishName }
     val genres = genres.joinToString { it.name }
-    val poster = if(posterPath == null) "" else BuildConfig.API_PATH_IMAGE + posterPath
-    val backdrop = if(backdropPath == null) "" else BuildConfig.API_PATH_IMAGE + backdropPath
+    val poster = if (posterPath == null) "" else BuildConfig.API_PATH_IMAGE + posterPath
+    val backdrop = if (backdropPath == null) "" else BuildConfig.API_PATH_IMAGE + backdropPath
 
     return MovieDetail(
         originalLanguage = originalLanguage,
@@ -51,6 +51,22 @@ fun MovieDetailResponse.toMovieDetail(): MovieDetail {
 }
 
 fun MovieDetailEntity.toMovieDetail() = MovieDetail(
-    originalLanguage, title, backdropPath, genres, id, voteCount, overview, originalTitle, runtime, posterPath, spokenLanguages, releaseDate, tagline, adult, homepage,status, isFavorite
+    originalLanguage,
+    title,
+    backdropPath,
+    genres,
+    id,
+    voteCount,
+    overview,
+    originalTitle,
+    runtime,
+    posterPath,
+    spokenLanguages,
+    releaseDate,
+    tagline,
+    adult,
+    homepage,
+    status,
+    isFavorite
 )
 

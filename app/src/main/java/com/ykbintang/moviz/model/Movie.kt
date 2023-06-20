@@ -12,12 +12,11 @@ data class Movie(
     val id: Int,
 )
 
-
 fun MovieListItem.toMovie() = Movie(
     originalTitle,
     title,
-    if(posterPath == null) "" else BuildConfig.API_PATH_IMAGE + posterPath,
-    if(backdropPath == null) "" else BuildConfig.API_PATH_IMAGE + backdropPath,
+    if (posterPath == null) "" else BuildConfig.API_PATH_IMAGE + posterPath,
+    if (backdropPath == null) "" else BuildConfig.API_PATH_IMAGE + backdropPath,
     releaseDate,
     id
 )

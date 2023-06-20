@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String","API_TOKEN",'"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjNkNGZjYjhkMjVjODI4ZmU4OTY2OWY2MzVmZjU0NSIsInN1YiI6IjYyYmU3YWYzYWY2ZTk0MDA1YWFhZGI3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QOEubegLXarMfClRpRk1tpCk-WjoJlZ6bNsZ6_GrKSg"'
+        buildConfigField "String","API_TOKEN",'"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjNkNGZjYjhkMjVjODI4ZmU4OTY2OWY2MzVmZjU0NSIsInN1YiI6IjYyYmU3YWYzYWY2ZTk0MDA1YWFhZGI3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QOEubegLXarMfClRpRk1tpCk-WjoJlZ6bNsZ6_GrKSg"'
         buildConfigField "String","API_PATH_IMAGE",'"https://image.tmdb.org/t/p/w500"'
         buildConfigField "String","API_BASE_PATH",'"https://api.themoviedb.org/3/"'
 
