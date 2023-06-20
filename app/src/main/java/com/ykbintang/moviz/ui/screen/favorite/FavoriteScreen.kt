@@ -13,10 +13,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -31,6 +29,7 @@ import coil.compose.rememberImagePainter
 import com.ykbintang.moviz.R
 import com.ykbintang.moviz.model.MovieDetail
 import com.ykbintang.moviz.ui.components.MessageComponent
+import com.ykbintang.moviz.ui.components.TopBarComponent
 import com.ykbintang.moviz.ui.helper.UiState
 
 @Composable
@@ -68,7 +67,6 @@ fun FavoriteScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieFavoriteContent(
     favoriteMovies: List<MovieDetail>,
@@ -78,7 +76,7 @@ fun MovieFavoriteContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TopAppBar(title = { Text(stringResource(id = R.string.title_favorite_movies)) })
+        TopBarComponent(title = stringResource(id = R.string.title_favorite_movies))
 
         LazyColumn(
             contentPadding = PaddingValues(16.dp)

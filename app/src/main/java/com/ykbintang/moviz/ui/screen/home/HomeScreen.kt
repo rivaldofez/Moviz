@@ -1,6 +1,5 @@
 package com.ykbintang.moviz.ui.screen.home
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,9 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,11 +22,11 @@ import com.ykbintang.moviz.model.Movie
 import com.ykbintang.moviz.ui.components.MessageComponent
 import com.ykbintang.moviz.ui.components.MovieItem
 import com.ykbintang.moviz.ui.components.SearchBar
+import com.ykbintang.moviz.ui.components.TopBarComponent
 import com.ykbintang.moviz.ui.helper.UiState
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetail: (Int) -> Unit,
 ) {
@@ -42,19 +38,26 @@ fun HomeScreen(
             }
 
             is UiState.Success -> {
-                if (uiState.data.isEmpty()) {
-                    MessageComponent(
-                        message = stringResource(id = R.string.err_data_empty),
-                        image = R.drawable.img_empty_placeholder
-                    )
-                } else {
-                    HomeContent(
-                        movies = uiState.data,
-                        onSubmit = viewModel::searchCurrentMovieData,
+                Column {
+                    TopBarComponent(title = stringResource(id = R.string.title_explore_movie))
+
+                    SearchBar(
                         query = query,
-                        onValueChanged = viewModel::updateQueryValue,
-                        navigateToDetail = navigateToDetail
+                        onSubmit = viewModel::searchCurrentMovieData,
+                        onValueChanged = viewModel::updateQueryValue
                     )
+
+                    if (uiState.data.isEmpty()) {
+                        MessageComponent(
+                            message = stringResource(id = R.string.err_data_empty),
+                            image = R.drawable.img_empty_placeholder
+                        )
+                    } else {
+                        HomeContent(
+                            movies = uiState.data,
+                            navigateToDetail = navigateToDetail
+                        )
+                    }
                 }
             }
 
@@ -68,12 +71,8 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeContent(
-    query: String,
-    onSubmit: () -> Unit,
-    onValueChanged: (String) -> Unit,
     movies: List<Movie>,
     modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit
@@ -82,11 +81,6 @@ fun HomeContent(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        TopAppBar(title = { Text(stringResource(id = R.string.title_explore_movie)) })
-
-        SearchBar(query = query, onSubmit = onSubmit, onValueChanged = onValueChanged)
-
         LazyVerticalGrid(
             columns = GridCells.Fixed(count = 3),
             contentPadding = PaddingValues(0.dp),

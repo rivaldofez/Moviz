@@ -12,6 +12,10 @@
     <string name="title_language">Language</string>
     <string name="title_favorite_movies">Favorite Movies</string>
     <string name="title_explore_movie">"Explore Movie"</string>
+    <string name="title_profile">"Profile"</string>
+    <string name="developer_name">"Yazis Kasnanda Bintang"</string>
+    <string name="developer_email">"ykbintang07@gmail.com"</string>
+    <string name="developer_username">"ykbintang"</string>
 
 
     <string name="pl_duration">%s minutes</string>
@@ -30,4 +34,5 @@
     <string name="cd_icon_fav_filled">Icon favorite active and selected</string>
     <string name="cd_icon_fav_unfilled">Icon favorite not favorited</string>
     <string name="cd_icon_back_button">Icon back to previous page</string>
+    <string name="cd_profile_picture">Developer Profile Picture</string>
 </resources>

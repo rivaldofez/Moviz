@@ -8,27 +8,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ykbintang.moviz.R
+import com.ykbintang.moviz.ui.components.TopBarComponent
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier
-){
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -36,37 +34,41 @@ fun ProfileScreen(
             .verticalScroll(rememberScrollState()),
 
         ) {
-        TopAppBar(title = { Text("Profile") })
-
+        TopBarComponent(title = stringResource(id = R.string.title_profile))
 
         Image(
             painter = painterResource(R.drawable.img_profile),
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.cd_profile_picture),
             contentScale = ContentScale.Crop,
             modifier = modifier
                 .height(250.dp)
                 .padding(16.dp)
                 .clip(RoundedCornerShape(16.dp))
-
         )
 
         Text(
-            text = "Yazis Kasnanda Bintang",
+            text = stringResource(id = R.string.developer_name),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.ExtraBold
             ),
         )
+        
+        Text(
+            text = stringResource(id = R.string.developer_username),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleSmall.copy(
+                fontWeight = FontWeight.Normal
+            ),
+        )
 
         Text(
-            text = "ykbintang07@gmail.com",
+            text = stringResource(id = R.string.developer_email),
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Normal
             ),
-            modifier = modifier.padding(top = 8.dp),
             color = MaterialTheme.colorScheme.secondary
         )
     }
-
 
 }
