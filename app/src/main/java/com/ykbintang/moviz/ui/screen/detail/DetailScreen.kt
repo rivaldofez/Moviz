@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -81,6 +82,7 @@ fun DetailScreen(
                                 )
                             }
                         }
+                        , modifier = Modifier.testTag("favorite_button")
                         ) {
                             if (data.isFavorite) {
                                 Icon(
@@ -221,6 +223,7 @@ fun DetailContent(
                         .clip(RoundedCornerShape(size = 8.dp))
                         .background(color = Color.White)
                         .padding(8.dp)
+                        .testTag("back_button")
 
                 )
             }
@@ -322,7 +325,7 @@ fun DetailContent(
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier
-                    .padding(top = 2.dp, start = 16.dp, end = 16.dp)
+                    .padding(top = 2.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
             )
 
 

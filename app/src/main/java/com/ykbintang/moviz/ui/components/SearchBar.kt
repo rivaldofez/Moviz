@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -45,6 +46,7 @@ fun SearchBar(
                 modifier = modifier.clickable {
                     onSubmit()
                 }
+                    .testTag("icon_search")
             )
         },
         singleLine = true,
@@ -63,6 +65,6 @@ fun SearchBar(
             .heightIn(min = 30.dp)
             .padding(horizontal = 16.dp)
             .shadow(4.dp)
-
+            .testTag("textfield_search")
     )
 }

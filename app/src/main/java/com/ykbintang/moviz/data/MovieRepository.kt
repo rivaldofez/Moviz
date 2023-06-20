@@ -7,6 +7,7 @@ import com.ykbintang.moviz.model.Movie
 import com.ykbintang.moviz.model.MovieDetail
 import com.ykbintang.moviz.model.toMovie
 import com.ykbintang.moviz.model.toMovieDetail
+import com.ykbintang.moviz.ui.helper.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -17,18 +18,29 @@ class MovieRepository @Inject constructor(
     private val movieDatabase: MovieDatabase
 ) {
     suspend fun getMovieNowPlaying(): Flow<List<Movie>> =
-        flowOf(movieService.getMovieNowPlaying().map {
-            it.toMovie()
-        })
+        wrapEspressoIdlingResource {
+            flowOf(movieService.getMovieNowPlaying().map {
+                it.toMovie()
+            })
+        }
+
+
+
 
     suspend fun getMovieDetail(movieId: Int): Flow<MovieDetail?> =
-        flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
+        wrapEspressoIdlingResource {
+            flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
+        }
 
 
     suspend fun getSearchMovie(query: String): Flow<List<Movie>> =
-        flowOf(movieService.getSearchMovie(query).map {
-            it.toMovie()
-        })
+        wrapEspressoIdlingResource {
+            flowOf(movieService.getSearchMovie(query).map {
+                it.toMovie()
+            })
+        }
+
+
 
     suspend fun insertFavoriteMovie(movieDetail: MovieDetail) =
         movieDatabase.movieDao()
@@ -36,17 +48,23 @@ class MovieRepository @Inject constructor(
 
 
     fun getFavoriteMovieById(movieId: Int): Flow<MovieDetail?> =
-        movieDatabase.movieDao().getFavoriteMovieById(movieId).map {
-            it?.toMovieDetail()
-        }
 
-
-    fun getFavoriteMovies(): Flow<List<MovieDetail>> =
-        movieDatabase.movieDao().getFavoriteMovies().map { listMovieDetailEntity ->
-            listMovieDetailEntity.map {
-                it.toMovieDetail()
+        wrapEspressoIdlingResource {
+            movieDatabase.movieDao().getFavoriteMovieById(movieId).map {
+                it?.toMovieDetail()
             }
         }
 
+
+
+
+    fun getFavoriteMovies(): Flow<List<MovieDetail>> =
+        wrapEspressoIdlingResource {
+            movieDatabase.movieDao().getFavoriteMovies().map { listMovieDetailEntity ->
+                listMovieDetailEntity.map {
+                    it.toMovieDetail()
+                }
+            }
+        }
 
 }

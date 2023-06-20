@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -93,6 +94,7 @@ fun HomeContent(
                 .fillMaxSize()
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
+                .testTag("lvg_movie")
         ) {
             items(movies, key = { it.id }) {
                 MovieItem(

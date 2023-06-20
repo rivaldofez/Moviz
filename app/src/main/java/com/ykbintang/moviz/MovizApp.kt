@@ -103,7 +103,7 @@ private fun BottomBar(
             NavigationItem(
                 title = "Favorite",
                 icon = Icons.Default.Favorite,
-                screen = Screen.Favorite
+                screen = Screen.Favorite,
             ),
             NavigationItem(
                 title = "Profile",
