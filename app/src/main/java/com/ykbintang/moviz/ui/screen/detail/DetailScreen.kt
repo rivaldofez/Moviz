@@ -80,7 +80,8 @@ fun DetailScreen(
                                     message = R.string.removed_from_favorite
                                 )
                             }
-                        }) {
+                        }
+                        ) {
                             if (data.isFavorite) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_favorite_filled),
