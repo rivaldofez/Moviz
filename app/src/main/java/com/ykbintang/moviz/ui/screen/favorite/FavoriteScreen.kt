@@ -63,22 +63,22 @@ fun MovieFavoriteContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TopAppBar(title = { Text("Explore Now Playing Movie")})
-    }
+        TopAppBar(title = { Text("Favorite Movies")})
 
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ){
-        items(favoriteMovies, key = { it.id }){ movie ->
-            MovieFavoriteItem(
-                image = movie.posterPath!!,
-                title = movie.title,
-                release = movie.releaseDate,
-                synopsis = movie.overview,
-                modifier = Modifier.clickable { navigateToDetail(movie.id) }
-            )
-            Divider()
+        LazyColumn(
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ){
+            items(favoriteMovies, key = { it.id }){ movie ->
+                MovieFavoriteItem(
+                    image = movie.posterPath!!,
+                    title = movie.title,
+                    release = movie.releaseDate,
+                    synopsis = movie.overview,
+                    modifier = Modifier.clickable { navigateToDetail(movie.id) }
+                )
+                Divider()
+            }
         }
     }
 }

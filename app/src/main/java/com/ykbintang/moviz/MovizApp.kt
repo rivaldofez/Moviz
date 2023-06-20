@@ -26,6 +26,7 @@ import com.ykbintang.moviz.navigation.NavigationItem
 import com.ykbintang.moviz.navigation.Screen
 import com.ykbintang.moviz.ui.screen.home.HomeScreen
 import com.ykbintang.moviz.ui.screen.detail.DetailScreen
+import com.ykbintang.moviz.ui.screen.favorite.FavoriteScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,8 +51,14 @@ fun MovizApp(
             modifier = Modifier.padding(innerPadding)
         ){
             composable(Screen.Home.route) {
-                HomeScreen(navigateToDetail = { gameId ->
-                    navController.navigate(Screen.MovieDetail.createRoute(gameId))
+                HomeScreen(navigateToDetail = { movieId ->
+                    navController.navigate(Screen.MovieDetail.createRoute(movieId))
+                })
+            }
+
+            composable(Screen.Favorite.route) {
+                FavoriteScreen(navigateToDetail = { movieId ->
+                    navController.navigate(Screen.MovieDetail.createRoute(movieId))
                 })
             }
 
