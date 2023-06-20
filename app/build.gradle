@@ -16,9 +16,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String","API_TOKEN",'"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjNkNGZjYjhkMjVjODI4ZmU4OTY2OWY2MzVmZjU0NSIsInN1YiI6IjYyYmU3YWYzYWY2ZTk0MDA1YWFhZGI3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QOEubegLXarMfClRpRk1tpCk-WjoJlZ6bNsZ6_GrKSg"'
-        buildConfigField "String","API_PATH_IMAGE",'"https://image.tmdb.org/t/p/w500"'
-        buildConfigField "String","API_BASE_PATH",'"https://api.themoviedb.org/3/"'
+        buildConfigField "String", "API_TOKEN", '"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjNkNGZjYjhkMjVjODI4ZmU4OTY2OWY2MzVmZjU0NSIsInN1YiI6IjYyYmU3YWYzYWY2ZTk0MDA1YWFhZGI3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QOEubegLXarMfClRpRk1tpCk-WjoJlZ6bNsZ6_GrKSg"'
+        buildConfigField "String", "API_PATH_IMAGE", '"https://image.tmdb.org/t/p/w500"'
+        buildConfigField "String", "API_BASE_PATH", '"https://api.themoviedb.org/3/"'
 
         testInstrumentationRunner "com.ykbintang.moviz.CustomTestRunner"
         vectorDrawables {
@@ -70,9 +70,9 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-
     implementation "androidx.navigation:navigation-compose:2.5.2"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+
     //retrofit2
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
@@ -90,6 +90,7 @@ dependencies {
     testImplementation 'com.google.dagger:hilt-android-testing:2.41'
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     // Room
     implementation "androidx.room:room-runtime:2.4.2"
@@ -99,9 +100,6 @@ dependencies {
     // IdlingResource
     implementation 'androidx.test.espresso:espresso-idling-resource:3.5.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
-
-
-
 
 
 }

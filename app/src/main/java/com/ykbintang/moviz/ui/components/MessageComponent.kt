@@ -33,7 +33,12 @@ fun MessageComponent(
     modifier: Modifier = Modifier,
 ) {
 
-    Box(modifier = modifier.fillMaxSize().testTag("error_message"), contentAlignment = Alignment.Center){
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .testTag("error_message"),
+        contentAlignment = Alignment.Center
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier

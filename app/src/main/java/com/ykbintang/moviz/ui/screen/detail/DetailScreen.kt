@@ -81,8 +81,7 @@ fun DetailScreen(
                                     message = R.string.removed_from_favorite
                                 )
                             }
-                        }
-                        , modifier = Modifier.testTag("favorite_button")
+                        }, modifier = Modifier.testTag("favorite_button")
                         ) {
                             if (data.isFavorite) {
                                 Icon(

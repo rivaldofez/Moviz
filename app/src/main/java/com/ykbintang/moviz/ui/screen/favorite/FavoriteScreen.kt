@@ -44,16 +44,19 @@ fun FavoriteScreen(
             }
 
             is UiState.Success -> {
-                if (uiState.data.isEmpty()) {
-                    MessageComponent(
-                        message = stringResource(id = R.string.err_data_empty),
-                        image = R.drawable.img_empty_placeholder
-                    )
-                } else {
-                    MovieFavoriteContent(
-                        favoriteMovies = uiState.data,
-                        navigateToDetail = navigateToDetail
-                    )
+                Column {
+                    TopBarComponent(title = stringResource(id = R.string.title_favorite_movies))
+                    if (uiState.data.isEmpty()) {
+                        MessageComponent(
+                            message = stringResource(id = R.string.err_data_empty),
+                            image = R.drawable.img_empty_placeholder
+                        )
+                    } else {
+                        MovieFavoriteContent(
+                            favoriteMovies = uiState.data,
+                            navigateToDetail = navigateToDetail
+                        )
+                    }
                 }
             }
 
@@ -76,7 +79,6 @@ fun MovieFavoriteContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TopBarComponent(title = stringResource(id = R.string.title_favorite_movies))
 
         LazyColumn(
             contentPadding = PaddingValues(16.dp)

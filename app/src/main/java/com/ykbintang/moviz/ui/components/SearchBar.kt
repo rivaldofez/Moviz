@@ -43,9 +43,10 @@ fun SearchBar(
             Icon(
                 imageVector = Icons.Rounded.Search,
                 contentDescription = stringResource(id = R.string.cd_icon_search),
-                modifier = modifier.clickable {
-                    onSubmit()
-                }
+                modifier = modifier
+                    .clickable {
+                        onSubmit()
+                    }
                     .testTag("icon_search")
             )
         },

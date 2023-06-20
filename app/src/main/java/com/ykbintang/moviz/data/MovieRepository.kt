@@ -25,8 +25,6 @@ class MovieRepository @Inject constructor(
         }
 
 
-
-
     suspend fun getMovieDetail(movieId: Int): Flow<MovieDetail?> =
         wrapEspressoIdlingResource {
             flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
@@ -41,7 +39,6 @@ class MovieRepository @Inject constructor(
         }
 
 
-
     suspend fun insertFavoriteMovie(movieDetail: MovieDetail) =
         movieDatabase.movieDao()
             .insertFavoriteMovie(movieDetail.toMovieDetailEntity())
@@ -54,8 +51,6 @@ class MovieRepository @Inject constructor(
                 it?.toMovieDetail()
             }
         }
-
-
 
 
     fun getFavoriteMovies(): Flow<List<MovieDetail>> =
