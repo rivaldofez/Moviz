@@ -9,6 +9,6 @@ import com.ykbintang.moviz.data.local.MovieDao
     version = 1,
     exportSchema = false
 )
-abstract class MovieDatabase: RoomDatabase() {
+abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 }

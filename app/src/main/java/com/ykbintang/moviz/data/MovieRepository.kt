@@ -16,41 +16,37 @@ class MovieRepository @Inject constructor(
     private val movieService: MovieService,
     private val movieDatabase: MovieDatabase
 ) {
-    suspend fun getMovieNowPlaying(): Flow<List<Movie>> {
-        return flowOf(movieService.getMovieNowPlaying().map {
+    suspend fun getMovieNowPlaying(): Flow<List<Movie>> =
+        flowOf(movieService.getMovieNowPlaying().map {
             it.toMovie()
         })
-    }
 
-    suspend fun getMovieDetail(movieId: Int): Flow<MovieDetail?>{
-        return flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
-    }
+    suspend fun getMovieDetail(movieId: Int): Flow<MovieDetail?> =
+        flowOf(movieService.getMovieDetail(movieId)?.toMovieDetail())
 
-    suspend fun getSearchMovie(query: String): Flow<List<Movie>> {
-        return flowOf(movieService.getSearchMovie(query).map {
+
+    suspend fun getSearchMovie(query: String): Flow<List<Movie>> =
+        flowOf(movieService.getSearchMovie(query).map {
             it.toMovie()
         })
-    }
 
-    suspend fun insertFavoriteMovie(movieDetail: MovieDetail){
-        movieDatabase.movieDao().insertFavoriteMovie(movieDetailEntity = movieDetail.toMovieDetailEntity())
-    }
+    suspend fun insertFavoriteMovie(movieDetail: MovieDetail) =
+        movieDatabase.movieDao()
+            .insertFavoriteMovie(movieDetail.toMovieDetailEntity())
 
-    fun getFavoriteMovieById(movieId: Int): Flow<MovieDetail?> {
-        return movieDatabase.movieDao().getFavoriteMovieById(movieId = movieId).map {
+
+    fun getFavoriteMovieById(movieId: Int): Flow<MovieDetail?> =
+        movieDatabase.movieDao().getFavoriteMovieById(movieId).map {
             it?.toMovieDetail()
         }
-    }
 
-    fun getFavoriteMovies(): Flow<List<MovieDetail>>{
-        return movieDatabase.movieDao().getFavoriteMovies().map { listMovieDetailEntity ->
+
+    fun getFavoriteMovies(): Flow<List<MovieDetail>> =
+        movieDatabase.movieDao().getFavoriteMovies().map { listMovieDetailEntity ->
             listMovieDetailEntity.map {
                 it.toMovieDetail()
             }
         }
-    }
-
-
 
 
 }

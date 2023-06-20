@@ -6,8 +6,7 @@ import com.ykbintang.moviz.model.MovieDetail
 
 @Entity(tableName = "movie")
 data class MovieDetailEntity(
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    @PrimaryKey(autoGenerate = false) val id: Int,
     val originalLanguage: String? = null,
     val title: String,
     val backdropPath: String,
@@ -27,5 +26,21 @@ data class MovieDetailEntity(
 )
 
 fun MovieDetail.toMovieDetailEntity() = MovieDetailEntity(
-    id, originalLanguage, title, backdropPath, genres, voteCount, overview, originalTitle, runtime, posterPath, spokenLanguages, releaseDate, tagline, adult, homepage, status, isFavorite
+    id,
+    originalLanguage,
+    title,
+    backdropPath,
+    genres,
+    voteCount,
+    overview,
+    originalTitle,
+    runtime,
+    posterPath,
+    spokenLanguages,
+    releaseDate,
+    tagline,
+    adult,
+    homepage,
+    status,
+    isFavorite
 )

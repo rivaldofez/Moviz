@@ -13,7 +13,7 @@ interface MovieDao {
     suspend fun insertFavoriteMovie(movieDetailEntity: MovieDetailEntity)
 
     @Query("SELECT * FROM movie WHERE id = :movieId LIMIT 1")
-    fun getFavoriteMovieById(movieId: Int) : Flow<MovieDetailEntity?>
+    fun getFavoriteMovieById(movieId: Int): Flow<MovieDetailEntity?>
 
     @Query("SELECT * FROM movie WHERE isFavorite = 1")
     fun getFavoriteMovies(): Flow<List<MovieDetailEntity>>
