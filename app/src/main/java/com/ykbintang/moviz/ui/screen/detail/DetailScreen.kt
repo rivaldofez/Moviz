@@ -97,8 +97,8 @@ fun DetailScreen(
                         originalTitle = data.originalTitle,
                         genres = data.genres,
                         languages = data.spokenLanguages,
-                        posterPath = "https://image.tmdb.org/t/p/w500" + data.posterPath,
-                        backdropPath = "https://image.tmdb.org/t/p/w500" + data.backdropPath,
+                        posterPath = data.posterPath,
+                        backdropPath = data.backdropPath,
                         modifier = modifier.padding(innerPadding),
                         onBackClick = navigateBack
                     )

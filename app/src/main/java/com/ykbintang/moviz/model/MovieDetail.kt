@@ -1,9 +1,8 @@
 package com.ykbintang.moviz.model
 
-import com.google.gson.annotations.SerializedName
+import com.ykbintang.moviz.BuildConfig
 import com.ykbintang.moviz.data.local.model.MovieDetailEntity
 import com.ykbintang.moviz.data.remote.model.MovieDetailResponse
-import com.ykbintang.moviz.data.remote.model.MovieListItem
 
 data class MovieDetail(
     val originalLanguage: String? = null,
@@ -15,7 +14,7 @@ data class MovieDetail(
     val overview: String,
     val originalTitle: String,
     val runtime: Int,
-    val posterPath: String?,
+    val posterPath: String,
     val spokenLanguages: String,
     val releaseDate: String,
     val tagline: String? = null,
@@ -28,18 +27,20 @@ data class MovieDetail(
 fun MovieDetailResponse.toMovieDetail(): MovieDetail {
     val languages = spokenLanguages.joinToString { it.englishName }
     val genres = genres.joinToString { it.name }
+    val poster = if(posterPath == null) "" else BuildConfig.API_PATH_IMAGE + posterPath
+    val backdrop = if(backdropPath == null) "" else BuildConfig.API_PATH_IMAGE + backdropPath
 
     return MovieDetail(
         originalLanguage = originalLanguage,
         title = title,
-        backdropPath = backdropPath,
+        backdropPath = backdrop,
         genres = genres,
         id = id,
         voteCount = voteCount,
         overview = overview,
         originalTitle = originalTitle,
         runtime = runtime,
-        posterPath = posterPath,
+        posterPath = poster,
         spokenLanguages = languages,
         releaseDate = releaseDate,
         tagline = tagline,
