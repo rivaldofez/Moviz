@@ -3,6 +3,24 @@
     <string name="added_to_favorite">Added to favorite list</string>
     <string name="removed_from_favorite">Removed from favorite list</string>
     <string name="search_movie">Search Movie...</string>
+    <string name="error_message">There is error occured, please try again</string>
+    <string name="title_synopsis">Synopsis :</string>
+    <string name="title_detail_information">Detail Information :</string>
+    <string name="title_original_title">Original Title</string>
+    <string name="title_duration">Duration</string>
+    <string name="title_genre">Genre</string>
+    <string name="title_language">Language</string>
+
+
+    <string name="pl_duration">%s minutes</string>
+
+
+
+
     <string name="cd_movie_item">Poster of %s</string>
     <string name="cd_icon_search">Search Icon</string>
+    <string name="cd_image_message">Image of message</string>
+    <string name="cd_icon_fav_filled">Icon favorite active and selected</string>
+    <string name="cd_icon_fav_unfilled">Icon favorite not favorited</string>
+    <string name="cd_icon_back_button">Icon back to previous page</string>
 </resources>

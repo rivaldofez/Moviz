@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.ykbintang.moviz.R
+import com.ykbintang.moviz.ui.components.MessageComponent
 import com.ykbintang.moviz.ui.helper.UiState
 import com.ykbintang.moviz.ui.theme.MovizTheme
 
@@ -50,20 +51,20 @@ import com.ykbintang.moviz.ui.theme.MovizTheme
 @Composable
 fun DetailScreen(
     movieId: Int,
-    modifier: Modifier = Modifier,
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
-){
+) {
     val context = LocalContext.current
 
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
-        when(uiState){
+        when (uiState) {
             is UiState.Loading -> {
                 viewModel.getMovieDetail(movieId = movieId)
             }
+
             is UiState.Success -> {
                 val data = uiState.data
-                Scaffold (
+                Scaffold(
                     floatingActionButton = {
                         FloatingActionButton(onClick = {
                             data.isFavorite = !data.isFavorite
@@ -80,15 +81,23 @@ fun DetailScreen(
                                 )
                             }
                         }) {
-                            if (data.isFavorite){
-                                Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null, tint = Color.White)
+                            if (data.isFavorite) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_favorite_filled),
+                                    contentDescription = stringResource(id = R.string.cd_icon_fav_filled),
+                                    tint = Color.White
+                                )
                             } else {
-                                Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null, tint = Color.White)
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_favorite_unfilled),
+                                    contentDescription = stringResource(id = R.string.cd_icon_fav_unfilled),
+                                    tint = Color.White
+                                )
                             }
                         }
                     },
                     modifier = Modifier.fillMaxSize()
-                ){ innerPadding ->
+                ) { innerPadding ->
                     DetailContent(
                         title = data.title,
                         release = data.releaseDate,
@@ -99,21 +108,24 @@ fun DetailScreen(
                         languages = data.spokenLanguages,
                         posterPath = data.posterPath,
                         backdropPath = data.backdropPath,
-                        modifier = modifier.padding(innerPadding),
+                        modifier = Modifier.padding(innerPadding),
                         onBackClick = navigateBack
                     )
                 }
             }
 
             is UiState.Error -> {
-
+                MessageComponent(
+                    message = stringResource(id = R.string.error_message),
+                    image = R.drawable.img_error_placeholder
+                )
             }
         }
 
     }
 }
 
-private fun showToast(context: Context, message: Int){
+private fun showToast(context: Context, message: Int) {
     Toast.makeText(
         context,
         message,
@@ -134,7 +146,7 @@ fun DetailContent(
     backdropPath: String,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -143,68 +155,65 @@ fun DetailContent(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .fillMaxWidth()
-        ){
+        ) {
             Box(
-                modifier = modifier.height(400.dp)
+                modifier = Modifier.height(400.dp)
             ) {
 
+                Column {
+                    Image(
+                        painter = rememberImagePainter(data = backdropPath),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(300.dp)
+                            .fillMaxWidth()
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.align(Alignment.BottomStart)
+                ) {
+                    Image(
+                        painter = rememberImagePainter(data = posterPath),
+                        contentDescription = stringResource(id = R.string.cd_movie_item, title),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(150.dp)
+                            .padding(start = 16.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+
                     Column {
-                        Image(
-                            painter = rememberImagePainter(data = backdropPath),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = modifier
-                                .height(300.dp)
-                                .fillMaxWidth()
-                        )
-                    }
-
-                    Row(
-                        modifier = modifier.align(Alignment.BottomStart)
-                    ) {
-                        Image(
-                            painter = rememberImagePainter(data = posterPath),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = modifier
-                                .height(200.dp)
-                                .width(150.dp)
-                                .padding(start = 16.dp)
-                                .clip(RoundedCornerShape(16.dp))
-
-
+                        Text(
+                            text = title,
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontWeight = FontWeight.ExtraBold
+                            ),
+                            maxLines = 2,
+                            modifier = Modifier
+                                .offset(y = 100.dp)
+                                .padding(start = 16.dp, top = 8.dp, end = 16.dp)
                         )
 
-                        Column {
-                            Text(
-                                text = title,
-                                textAlign = TextAlign.Start,
-                                style = MaterialTheme.typography.headlineSmall.copy(
-                                    fontWeight = FontWeight.ExtraBold
-                                ),
-                                maxLines = 2
-                                ,
-                                modifier = modifier
-                                    .offset(y = 100.dp)
-                                    .padding(start = 16.dp, top = 8.dp, end = 16.dp)
-                            )
-
-                            Text(
-                                text = release,
-                                textAlign = TextAlign.Center,
-                                style = MaterialTheme.typography.bodyLarge.copy(
-                                    fontWeight = FontWeight.Normal
-                                ),
-                                modifier = modifier
-                                    .offset(y = 100.dp)
-                                    .padding(start = 16.dp, end = 16.dp)
-                            )
-                        }
+                        Text(
+                            text = release,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontWeight = FontWeight.Normal
+                            ),
+                            modifier = Modifier
+                                .offset(y = 100.dp)
+                                .padding(start = 16.dp, end = 16.dp)
+                        )
                     }
+                }
 
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back Button",
+                    contentDescription = stringResource(id = R.string.cd_icon_back_button),
                     modifier = Modifier
                         .padding(16.dp)
                         .clickable { onBackClick() }
@@ -216,111 +225,109 @@ fun DetailContent(
             }
 
             Text(
-                text = "Synopsis",
+                text = stringResource(id = R.string.title_synopsis),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
-                modifier = modifier
-                    .padding(top = 16.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
                 text = synopsis,
-                textAlign = TextAlign.Start,
+                textAlign = TextAlign.Justify,
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = modifier
-                    .padding(top = 4.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = "Detail Information",
+                text = stringResource(id = R.string.title_detail_information),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
-                modifier = modifier
-                    .padding(top = 8.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = "Original Title",
+                text = stringResource(id = R.string.title_original_title),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
-                modifier = modifier
-                    .padding(top = 4.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
                 text = originalTitle,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = modifier
-                    .padding(top = 2.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 2.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = "Duration",
+                text = stringResource(id = R.string.title_duration),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
-                modifier = modifier
-                    .padding(top = 4.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = duration,
+                text = stringResource(id = R.string.pl_duration, duration),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = modifier
-                    .padding(top = 2.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 2.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = "Genre",
+                text = stringResource(id = R.string.title_genre),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold,
                 ),
-                modifier = modifier
-                    .padding(top = 4.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
                 text = genres,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = modifier
-                    .padding(top = 2.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 2.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
-                text = "Language",
+                text = stringResource(id = R.string.title_language),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
-                modifier = modifier
-                    .padding(top = 4.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
             )
 
             Text(
                 text = languages,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = modifier
-                    .padding(top = 2.dp, start = 16.dp)
+                modifier = Modifier
+                    .padding(top = 2.dp, start = 16.dp, end = 16.dp)
             )
 
 
         }
     }
 }
-
-
 
 
 @Preview(showBackground = true)
