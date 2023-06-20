@@ -69,7 +69,7 @@ fun HomeContent(
 
 
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(150.dp),
+            columns = GridCells.Fixed(count = 3),
             contentPadding = PaddingValues(0.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp, alignment = Alignment.CenterHorizontally),
             verticalArrangement = Arrangement.spacedBy(16.dp),

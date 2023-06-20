@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.ykbintang.moviz.ui.theme.Shapes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,7 @@ fun SearchBar(
             )
         },
         singleLine = true,
-        shape = RoundedCornerShape(50),
+        shape = Shapes.medium,
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
             disabledIndicatorColor = Color.Transparent,
