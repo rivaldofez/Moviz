@@ -27,6 +27,7 @@ import com.ykbintang.moviz.navigation.Screen
 import com.ykbintang.moviz.ui.screen.home.HomeScreen
 import com.ykbintang.moviz.ui.screen.detail.DetailScreen
 import com.ykbintang.moviz.ui.screen.favorite.FavoriteScreen
+import com.ykbintang.moviz.ui.screen.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,6 +61,10 @@ fun MovizApp(
                 FavoriteScreen(navigateToDetail = { movieId ->
                     navController.navigate(Screen.MovieDetail.createRoute(movieId))
                 })
+            }
+
+            composable(Screen.Profile.route){
+                ProfileScreen()
             }
 
             composable(
