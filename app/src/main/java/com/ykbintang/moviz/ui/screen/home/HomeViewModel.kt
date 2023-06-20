@@ -1,6 +1,5 @@
 package com.ykbintang.moviz.ui.screen.home
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -16,7 +15,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository): ViewModel() {
+class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository) :
+    ViewModel() {
     private val _uiState: MutableStateFlow<UiState<List<Movie>>> = MutableStateFlow(UiState.Loading)
 
     val uiState: StateFlow<UiState<List<Movie>>> get() = _uiState
@@ -24,48 +24,41 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
     private val _query = mutableStateOf("")
     val query: State<String> get() = _query
 
-
-    fun updateQueryValue(query: String){
+    fun updateQueryValue(query: String) {
         _query.value = query
     }
 
     fun searchCurrentMovieData() = viewModelScope.launch {
-        Log.d("Testong", "called on search view model")
-        if(query.value.isEmpty()){
-            getMovieNowPlayig()
+        if (query.value.isEmpty()) {
+            getMovieNowPlaying()
         } else {
             try {
                 movieRepository.getSearchMovie(_query.value)
                     .catch {
                         _uiState.value = UiState.Error(it.message.toString())
-                        Log.d("Testin", "catch collect get search movie")
                     }
                     .collect {
                         _uiState.value = UiState.Success(it)
                     }
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message.toString())
-                Log.d("Testin", "catch error get search movie")
-                Log.d("Testin", e.message.toString())
             }
         }
     }
 
-    fun getMovieNowPlayig() {
+    private fun getMovieNowPlaying() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
                 movieRepository.getMovieNowPlaying()
                     .catch {
                         _uiState.value = UiState.Error(it.message.toString())
-                        Log.d("Testin", "catch collect get now play")
                     }
                     .collect {
                         _uiState.value = UiState.Success(it)
                     }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message.toString())
-                Log.d("Testin", "catch error get now play movie")
             }
         }
     }

@@ -10,9 +10,16 @@
     <string name="title_duration">Duration</string>
     <string name="title_genre">Genre</string>
     <string name="title_language">Language</string>
+    <string name="title_favorite_movies">Favorite Movies</string>
+    <string name="title_explore_movie">"Explore Movie"</string>
 
 
     <string name="pl_duration">%s minutes</string>
+
+    <string name="err_found_nil_data">Found nil data when get the data</string>
+    <string name="err_data_empty">Data still empty</string>
+
+
 
 
 

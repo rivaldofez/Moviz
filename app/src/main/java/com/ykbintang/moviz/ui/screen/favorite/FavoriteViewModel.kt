@@ -13,12 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(private val movieRepository: MovieRepository): ViewModel() {
-    private val _uiState: MutableStateFlow<UiState<List<MovieDetail>>> = MutableStateFlow(UiState.Loading)
+class FavoriteViewModel @Inject constructor(private val movieRepository: MovieRepository) :
+    ViewModel() {
+    private val _uiState: MutableStateFlow<UiState<List<MovieDetail>>> =
+        MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<List<MovieDetail>>> get() = _uiState
 
-
-    fun getFavoriteMovies(){
+    fun getFavoriteMovies() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
 
@@ -30,7 +31,7 @@ class FavoriteViewModel @Inject constructor(private val movieRepository: MovieRe
                     .collect {
                         _uiState.value = UiState.Success(it)
                     }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message.toString())
             }
         }
