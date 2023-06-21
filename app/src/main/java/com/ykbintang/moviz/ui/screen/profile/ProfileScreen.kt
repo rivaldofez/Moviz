@@ -2,11 +2,11 @@ package com.ykbintang.moviz.ui.screen.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,7 +30,7 @@ fun ProfileScreen(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
 
         ) {
@@ -41,9 +41,9 @@ fun ProfileScreen(
             contentDescription = stringResource(id = R.string.cd_profile_picture),
             contentScale = ContentScale.Crop,
             modifier = modifier
-                .height(250.dp)
-                .padding(16.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .padding(top = 24.dp)
+                .size(150.dp)
+                .clip(CircleShape),
         )
 
         Text(
@@ -52,6 +52,7 @@ fun ProfileScreen(
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.ExtraBold
             ),
+            modifier = Modifier.padding(top = 16.dp)
         )
         
         Text(
