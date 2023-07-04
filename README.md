@@ -46,9 +46,9 @@
 ## About The Project
 
 <p align="middle">
-    <img src="images/image_1.png" width="150" /> 
-    <img src="images/image_2.png" width="150" />
-    <img src="images/image_3.png" width="150" />
+    <img src="Images/Image_1.png" width="150" /> 
+    <img src="Images/Image_2.png" width="150" />
+    <img src="Images/Image_3.png" width="150" />
 </p>
 
 
