@@ -13,9 +13,9 @@
     <string name="title_favorite_movies">Favorite Movies</string>
     <string name="title_explore_movie">"Explore Movie"</string>
     <string name="title_profile">"Profile"</string>
-    <string name="developer_name">"Yazis Kasnanda Bintang"</string>
-    <string name="developer_email">"ykbintang07@gmail.com"</string>
-    <string name="developer_username">"ykbintang"</string>
+    <string name="developer_name">"Rivaldo Fernandes"</string>
+    <string name="developer_email">"rivaldofez@gmail.com"</string>
+    <string name="developer_username">"rivaldofez"</string>
 
 
     <string name="pl_duration">%s minutes</string>
