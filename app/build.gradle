@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.ykbintang.moviz'
+    namespace 'com.rivaldofez.moviz'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.ykbintang.moviz"
+        applicationId "com.rivaldofez.moviz"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -20,7 +20,7 @@ android {
         buildConfigField "String", "API_PATH_IMAGE", '"https://image.tmdb.org/t/p/w500"'
         buildConfigField "String", "API_BASE_PATH", '"https://api.themoviedb.org/3/"'
 
-        testInstrumentationRunner "com.ykbintang.moviz.CustomTestRunner"
+        testInstrumentationRunner "com.rivaldofez.moviz.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
